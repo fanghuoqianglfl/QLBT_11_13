@@ -98,7 +98,7 @@ One of the compelling features of heavy quarks is the wide range of physics in t
 At low $p_\mathrm{T}$, heavy quarks can be utilized to study the diffusion and thermalization processes inside the QGP.
 At intermediate $p_\mathrm{T}$, heavy flavor hadrons are excellent tools to investigate the hadronization mechanisms of colored partons into color-neutral hadrons.
 At high $p_\mathrm{T}$ where perturbative interactions dominate, heavy quarks can be used to investigate the flavor and mass dependences of parton energy loss and jet quenching.
-Tremendous efforts have been devoted to the study of heavy quark dynamics in relativistic heavy-ion collisions~\cite{Dong:2019byy, Rapp:2018qla, Cao:2018ews, Uphoff:2011ad, He:2011qa, Young:2011ug, Alberico:2011zy, Nahrgang:2013saa, Cao:2013ita, Djordjevic:2013xoa, Cao:2015hia, Das:2015ana, Song:2015ykw, Cao:2016gvr, Kang:2016ofv, Prado:2016szr, Cao:2017crw, Liu:2017qah, Li:2018izm, Ke:2018tsh, Katz:2019fkc, Xing:2019xae, Li:2020kax}.
+Tremendous efforts have been devoted to the study of heavy quark dynamics in relativistic heavy-ion collisions~\cite{Dong:2019byy, Rapp:2018qla, Cao:2018ews, Uphoff:2011ad, He:2011qa, Young:2011ug, Alberico:2011zy, Nahrgang:2013saa, Cao:2013ita, Djordjevic:2013xoa, Cao:2015hia, Das:2015ana, Song:2015ykw, Cao:2016gvr, Kang:2016ofv, Prado:2016szr, Cao:2017crw, Liu:2017qah, Li:2018izm, Ke:2018tsh, Zhang:2018nie, Katz:2019fkc, Xing:2019xae, Li:2020kax}.
 
 
 To describe heavy quark diffusion and energy loss in QGP, there are two common approaches: Langevin and Boltzmann transport models.
@@ -122,12 +122,13 @@ The remainder of this paper will be organized as follows. In Sec.~\ref{sec:QPM},
 \section{The quasi-particle model of QGP}
 \label{sec:QPM}
 
-In the quasi-particle model, the system of interacting quarks and gluons in a thermalized QGP is effectively represented by an ideal gas of non-interacting massive quarks (called quasi-particles) \cite{Gorenstein:1995vm,Levai:1997yx,Bozek:1998dj,Bluhm:2004xn,Plumari:2011mk, Cassing:2008nn, Cassing:2008sv, Gossiaux:2009mk, Cassing:2009vt, Bratkovskaya:2011wp, Berrehrah:2014kba, Das:2015ana, Berrehrah:2015ywa, Song:2015ykw, Scardina:2017ipo}.
+In our quasi-particle model, the system of interacting quarks and gluons in a thermalized QGP is effectively represented by an ideal gas of non-interacting massive quarks and quarks (called quasi-particles) \cite{Gorenstein:1995vm,Levai:1997yx,Bozek:1998dj,Bluhm:2004xn,Plumari:2011mk, Gossiaux:2009mk, Das:2015ana, Scardina:2017ipo}.
 The masses of the quasi-particles contain all the non-perturbative dynamics of the interaction and can be viewed as the interaction energy among quarks and gluons in the QGP.
-To describe the main thermodynamic features, such as the energy density, pressure and entropy density as a function of temperature, obtained from lattice QCD simulations, the thermal masses of quasi-particles have to be temperature dependent.
+Note that Refs. \cite{Cassing:2008nn, Cassing:2008sv, Cassing:2009vt, Bratkovskaya:2011wp, Berrehrah:2014kba, Berrehrah:2015ywa,  Song:2015ykw} has included off-shell parton transport.
+To describe the main thermodynamic features, such as the energy density, pressure and entropy density as a function of temperature, obtained from lattice QCD simulations, the thermal masses of quasi-particles have to be temperature-dependent.
 Usually a temperature-dependent bag pressure is also introduced to account for other non-perturbative effects and to meet the self-consistency of thermodynamic properties.
 
-In this work, we utilize the following forms (motivated by perturbative QCD calculation~\cite{Levai:1997yx}) for the temperature-dependent effective masses of quarks and gluons,
+In this work, we utilize the following forms (motivated by perturative QCD calculation) for the temperature-dependent effective masses of quarks and gluons,
 \begin{align}
   \label{eq:boltzmann1}
   & m_g^2(T) =\frac{1}{6} \left(N_c+\frac{1}{2} N_f \right)  g^2(T) T^2, \\
@@ -178,8 +179,8 @@ P({\rm data} | \theta) = \prod_i \frac{1}{\sqrt{2 \pi} \sigma_i} e^{- \frac{(y_i
 \end{align}
 where $y_i$ denotes model calculation results, $y_{\rm exp}$ denote the experiment or lattice QCD data, $\sigma_i$ denote the standard errors at each data point.
 Following Ref.~\cite{He:2018gks}, we employ the PyMC library~\cite{pymc_bib} to perform the Markov Chain Monte Carlo (MCMC) estimation of the parameters with Metropolis-Hastings random walk in the parameter space.
-During the $g(T)$ fitting process, the prior distributions of model parameters $(a,b,c,d)$ are taken as the uniform distribution within given ranges as shown in Table~\ref{tab:1}. \textcolor{blue}{Given the value of paratemers $(a,b,c,d)$, the estimated values of entropy densities $s(T,a,b,c,d)$  are then fed as the initial guess of these parameters in MCMC to sample 20000 sets of parameters.} %The estimated values are then fed as the initial guess of these parameters in MCMC to sample $20000$ sets of parameters. 
-
+During the $g(T)$ fitting process, the prior distributions of model parameters $(a,b,c,d)$ are taken as the uniform distribution within given ranges as shown in Table~\ref{tab:1}. 
+We use maximum {\it a posterior} (MAP) method in PyMC to estimate the initial values of the parameters, which are fed to MCMC to sample $20000$ sets of parameters.
 
 \begin{table}[htb]
 \centering
@@ -188,14 +189,14 @@ During the $g(T)$ fitting process, the prior distributions of model parameters $
  \hline
  Lattice Data & Parameters & Prior Range  \\
  \hline
-    & $a$ & [0.1, 10]    \\
-  WB   & $b$ & [0, 1]  \\
-      & $c$ & [0, 10]   \\
-      & $d$ & [0, 2]   \\ \hline
-   & $a$ & [0, 10]   \\
-  HQ   & $b$ & [-1, 1]  \\
-  	  & $c$ & [10, 80]  \\
-  	  & $d$ & [0, 10]   \\
+    & a & [0.1, 10]    \\
+  WB   & b & [0, 1]  \\
+      & c & [0, 10]   \\
+      & d & [0, 2]   \\ \hline
+   & a & [0, 10]   \\
+  HQ   & b & [-1, 1]  \\
+  	  & c & [10, 80]  \\
+  	  & d & [0, 10]   \\
   \hline
 \end{tabular}
 	\caption{The ranges of model parameters $(a,b,c,d)$ used in the prior distributions.}
@@ -219,8 +220,8 @@ In Fig.~\ref{entropy-density}, we present our calibration of the entropy density
 \end{figure*}
 
 
-By comparing to the entropy density $s(T)$ as a function of temperature, we may extract the values of the parameters $a$, $b$, $c$ and $d$ in the temperature-dependent coupling $g(T)$. In Fig.~\ref{abcd-values}, we show the posterior distribution for these four parameters as well as the correlations between them. The left plot shows the calibration results using WB data, and the right plot for using HQ data. The mean values and standard deviations from our calibration are summarized in Tab.~\ref{tab:2}. \textcolor{blue}{Since the correlation between the error bars of different lattice data points have not been included in our current analysis, the standard deviations of the extracted parameters and the error bands our calibrated entropy density are underestimated. If only half the lattice data points are included in analysis, the error band will increase about 10\% for the extracted entropy density, and about 30\% for the coupling strength $g(T)$ presented below.}
-%provided correlated strongly, the band of coupling $g(T)$ from using half of data points are close to 1.3 times of results using all lattice data points, while the correlation between parameters in coupling $g(T)$ leads to the change of $g(T)$ and entropy are less than the change of standard deviations of parameters $(a,b,c,d)$}. 
+By comparing to the entropy density $s(T)$ as a function of temperature, we may extract the values of the parameters $a$, $b$, $c$ and $d$ in the temperature-dependent coupling $g(T)$. In Fig.~\ref{abcd-values}, we show the posterior distribution for these four parameters as well as the correlations between them. The left plot shows the calibration results using WB data, and the right plot for using HQ data.
+The mean values and standard deviations from our calibration are summarized in Tab.~\ref{tab:2}.
 
 
 \begin{table}[htb]
@@ -231,14 +232,14 @@ By comparing to the entropy density $s(T)$ as a function of temperature, we may 
  \hline
  Lattice Data & Parameters & Mean Values & Standard Errors  \\
  \hline
-    & $a$ & 2.063 & 0.1705    \\
-  WB   & $b$ & 0.836 & 0.1186   \\
-      & $c$ & 7.792 & 0.9857   \\
-      & $d$ & 0.492 & 0.054   \\ \hline
-   & $a$ & 6.8899 & 1.055   \\
-  HQ   & $b$ & 0.398 & 0.462  \\
-  	  & $c$ & 54.9825 & 12.76  \\
-  	  & $d$ & 0.449 & 0.0432   \\
+    & a & 2.063 & 0.1705    \\
+  WB   & b & 0.836 & 0.1186   \\
+      & c & 7.792 & 0.9857   \\
+      & d & 0.492 & 0.054   \\ \hline
+   & a & 6.8899 & 1.055   \\
+  HQ   & b & 0.398 & 0.462  \\
+  	  & c & 54.9825 & 12.76  \\
+  	  & d & 0.449 & 0.0432   \\
   \hline
 \end{tabular}
 	\caption{The mean and standard deviations of parameters $(a,b,c,d)$ in the coupling $g(T)$ extracted from Wuppertal-Budapest and Hot QCD lattice QCD data.}
@@ -250,7 +251,6 @@ One can observe from the left panel that the fitted coupling $g(T)$ shows a decr
 In the fitting process, we disregard all the parameter sets which give divergent or negative values of $g(T)$.
 In the right panel, one can see that as $T$ decreases, the quasi-particle masses first decrease and then increase; the transition is around $1.4T_\mathrm{c}$.
 It is interesting to notice that the qualitative feature of strong coupling $g(T)$ and quasi-particle masses $m(T)$ are quite similar between the extractions from the two sets of lattice QCD data. However, quantitative difference still exists in $g(T)$ and $m(T)$ due to the different $T_\mathrm{c}$ values and temperature dependences of the entropy density $s(T)$ between WB and HQ data (as shown in Fig.~\ref{entropy-density}).
-{\color{blue} We note that varying the prior ranges of our parameters listed Tab.~\ref{tab:1} can change the values of the parameters summarized in Tab.~\ref{tab:2} because these parameters have not been designed orthogonal to each other yet. However, we have verified that their combination for $g(T)$ has little dependence on the prior ranges. Therefore, we also expect the heavy meson observables explored in the rest of this work will not be affected by the choice of the prior ranges here either.}
 
 
 
@@ -294,6 +294,7 @@ where
 \end{align}
 with $A = |\vec{p}_1|\cos \theta_4 + |\vec{p}_2|\cos \theta_{24}$, and $B = p_1 \cdot p_2 + m_4^2$. To achieve the above expressions, we have chosen heavy quark momentum $\vec{p}_1$ along the $+z$ direction and the medium parton momentum $\vec{p}_2$ in the $xz$ plane ($\theta_2$ is the polar angle of $\vec{p}_2$). $(\theta_4, \phi_4)$ are the polar and azimuthal angle of $\vec{p}_4$. $\theta_{24}$ is the angle between $\vec{p}_2$ and $\vec{p}_4$. Due to the introduction of the thermal parton masses, the above expression is more complicated compared to the massless scenario in the earlier work~\cite{Cao:2016gvr}. Regarding the above two solutions, we choose the one which can return to the solution in Ref.~\cite{Cao:2016gvr} when we take the quasi-particles to be massless, i.e., the ``+" sign is taken for $A > 0$ and ``--” for $A < 0$. This is another modification by introducing the quasi-particle masses in addition to the matrix element and the density distribution discussed earlier.
 
+
 In the LBT simulation, one first calculates the elastic scattering rate through each scattering channel $\Gamma_{\rm el}^{(i)}(\vec{p}, T)$ for a heavy quark with a given momentum $\vec{p}$ and a local temperature $T$ of the surrounding medium. The total scattering rate is the sum of different channels: $\Gamma_{\rm el} = \sum_{i} \Gamma_{\rm el}^{(i)}$.
 Assuming the Poisson distribution for the number of scatterings in a given time step $\Delta t$, the elastic scattering probability can be given by:
 \begin{align}
@@ -314,7 +315,7 @@ For the inelastic process, or medium-induced gluon emission, experienced by part
 \begin{align}
 \frac{dN_g}{dx dk_\perp^2 dt}=\frac{2 \alpha_{\rm s} C_A P(x)k_\perp^4}{\pi (k_\perp^2+x^2M^2)^4} \hat{q} \sin^2 \bigg(\frac{t-t_i}{2\tau_f} \bigg),
 \end{align}
-where $x$ is the fractional energy of the emitted gluon taken from its parent parton, $k_\perp$ is the gluon transverse momentum with respect to the parent parton, $\alpha_\mathrm{s}$ is the strong coupling, $P(x)$ is the vacuum splitting function, $\tau_f$ is the formation time of the radiated gluon in the form of $\tau_f=2Ex (1-x)/(k_\perp^2+x^2 M^2)$ with $M$ being the mass of the parent parton, and $t_i$ denotes the initial time or the production time of the parent parton. {\color{red} The jet transport parameter $\hat{q}$ is defined as the transverse momentum broadening rate due to elastic collisions between jet partons and medium constituents, which can be obtained by evaluating Eq.~(\ref{eq:gamma0}) with a weight of $(\vec{p}_{2\perp}-\vec{p}_{4\perp})^2$ in the integral.}
+where $x$ is the fractional energy of the emitted gluon taken from its parent parton, $k_\perp$ is the gluon transverse momentum with respect to the parent parton, $\alpha_\mathrm{s}$ is the strong coupling, $P(x)$ is the vacuum splitting function, $\hat{q}$ is the quark transport parameter characterizing the transverse momentum broadening rate due to elastic collisions between jet partons and medium constituents, $\tau_f$ is the formation time of the radiated gluon in the form of $\tau_f=2Ex (1-x)/(k_\perp^2+x^2 M^2)$ with $M$ being the mass of the parent parton, and $t_i$ denotes the initial time or the production time of the parent parton.
 
 To simulate the gluon radiation process in a given time step $\Delta t$ in the LBT model, we first calculate the average gluon number from the above gluon spectrum as
 \begin{align}
@@ -332,13 +333,16 @@ In the end, by combining elastic and inelastic processes, we obtain the followin
 \end{align}
 The above probability can be splitted into two parts: pure elastic scattering with probability  $P_{\rm el} (1 - P_{\rm inel})$ and inelastic scattering with probability $P_{\rm inel}$.
 
-One of the key quantity that determines the interaction strength between heavy quarks and the QGP medium is the strong coupling $\alpha_{\rm s}$. In fact, there are three different coupling parameters associated with the elastic and inelastic scatterings under discussion, which are in principle can be all different. As illustrated in Fig.~\ref{cg_el_inel}, we use $\alpha_\mathrm{s}(T)=g^2(T)/(4\pi)$ for the vertex directly connecting to the thermal parton inside the medium, where $g(T)$ is the temperature dependent coupling parameter previously extracted from the lattice EoS. For the other two vertices that connect to the jet parton (heavy quark), we assume the following parametric form:
+
+
+
+One of the key quantity that determines the interaction strength between heavy quarks and the QGP medium is the strong coupling $\alpha_{\rm s}$. In fact, there are three different coupling parameters associated with the elastic and inelastic scatterings under discussion, which are in principle can be all different. As illustrated in Fig.~\ref{cg_el_inel}, we use $\alpha_\mathrm{s}=g^2(T)/(4\pi)$ for the vertex directly connecting to the thermal parton inside the medium, where $g(T)$ is the temperature dependent coupling parameter previously extracted from the lattice EoS. For the other two vertices that connect to the jet parton (heavy quark), we assume the following parametric form:
 \begin{align}
 \label{eq:paraAlphas}
 \alpha_{\rm s}(E)&=\frac{12 \pi}{(11N_c - 2N_f) \log\left[\left(A  E/ T_\mathrm{c} + B\right)^2\right]},
 \end{align}
 where $E$ is the jet parton (heavy quark) energy, and the parameters $A$ and $B$ will be determined from the heavy quark observables, such as $R_\mathrm{AA}$ and $v_2$ of heavy mesons, in the next section.
-In this work, the prior distributions for two parameters $A$ and $B$ are taken as uniform within the ranges summarized in Table \ref{tab:3}. {\color{red} Note that the jet transport parameter, due to the elastic scattering process, is contributed by both vertices in the left panel of Fig.~\ref{cg_el_inel}, thus is proportional to $\alpha_\mathrm{s}(T) \times \alpha_{\rm s}(E)$.} 
+In this work, the prior distributions for two parameters $A$ and $B$ are taken as uniform within the ranges summarized in Table \ref{tab:3}.
 
 
 \begin{table}[htb]
@@ -349,8 +353,8 @@ In this work, the prior distributions for two parameters $A$ and $B$ are taken a
  \hline
  Lattice Data & Parameters & Prior Range  \\
  \hline
-  WB/HQ  & $A$ & [0.032, 0.16]    \\
-  WB/HQ  & $B$ & [0.64, 15]  \\
+  WB/HQ  & A & [0.032, 0.08]    \\
+  WB/HQ  & B & [0.64, 15]  \\
   \hline
 \end{tabular}
 	\caption{The ranges of model parameters $(A,B)$ used in the prior distributions.}
@@ -364,7 +368,7 @@ In this work, the prior distributions for two parameters $A$ and $B$ are taken a
 \includegraphics[width=0.485\linewidth]{wb_hot_Pb502_30_50_V2_bys_pT_complete.pdf}
 \includegraphics[width=0.485\linewidth]{wb_hot_Au200_0_10_Raa_bys_pT_complete.pdf}
 \includegraphics[width=0.485\linewidth]{wb_hot_Au200_10_40_V2_bys_pT_complete.pdf}
-	\caption{Using the Bayesian analysis, the nuclear modification factors $R_\mathrm{AA}$ and the elliptic flow $v_2$ for $D$ mesons in Pb-Pb collisions at $\sqrt{s_{\rm NN}} = 5.02$~TeV at the LHC and in Au-Au collisions at $\sqrt{s_{\rm NN}}= 200$~GeV at RHIC are compared to the experimental data from CMS Collaboration~\cite{Sirunyan:2017xss, Sirunyan:2017plt} and STAR Collaboration~\cite{Adam:2018inb, Adamczyk:2017xur}.}
+	\caption{Using the Bayesian analysis, the nuclear modifiacation factors $R_\mathrm{AA}$ and the elliptic flow $v_2$ for $D$ mesons in Pb-Pb collisions at $\sqrt{s_{\rm NN}} = 5.02$~TeV at the LHC and in Au-Au collisions at $\sqrt{s_{\rm NN}}= 200$~GeV at RHIC are compared to the experimental data from CMS Collaboration~\cite{Sirunyan:2017xss, Sirunyan:2017plt} and STAR Collaboration~\cite{Adam:2018inb, Adamczyk:2017xur}.}
 	\label{RAA-v2}
 \end{figure*}
 
@@ -397,18 +401,16 @@ In this work, the prior distributions for two parameters $A$ and $B$ are taken a
 \section{NUMERICAL RESULTS for $R_{\rm AA}$ and $v_2$}
 \label{sec:results}
 
-Using the newly developed QLBT model as described above, one can calculate the nuclear modification factor $R_\mathrm{AA}$ and the elliptic flow $v_2$ for $D$ mesons at RHIC and the LHC. The spatial distributions of the heavy quark production vertices are calculated using the Monte-Carlo Glauber model, while their initial momentum distribution is taken from the LO perturbative QCD calculation that includes pair production ($q\bar{q}\rightarrow Q\bar{Q}$, $gg\rightarrow Q\bar{Q}$) and flavor excitation ($qQ\rightarrow qQ$, $gQ\rightarrow gQ$) processes. Meanwhile, the QGP medium is simulated using the (3+1)-dimensional CLVisc hydrodynamic model~\cite {Pang:2018zzo,Wu:2018cpc} whose initial energy density is obtained from the AMPT model~\cite{Lin:2004en}. In order to provide reasonable descriptions of the soft hadron spectra, the starting time of the hydrodynamic evolution is set as $\tau_0=0.6$~fm and the specific shear viscosity is set as $\eta/s=0.08$. 
+Using the newly developed QLBT model as described above, one can calculate the nuclear modification factor $R_\mathrm{AA}$ and the elliptic flow $v_2$ for $D$ mesons at RHIC and the LHC. The spatial distributions of the heavy quark production vertices are calculated using the Monte-Carlo Glauber model, while their initial momentum distribution is taken from the LO perturbative QCD calculation that includes pair production ($q\bar{q}\rightarrow Q\bar{Q}$, $gg\rightarrow Q\bar{Q}$) and flavor excitation ($qQ\rightarrow qQ$, $gQ\rightarrow gQ$) processes. Meanwhile, the QGP medium is simulated using the (3+1)-dimensional CLVisc hydrodynamic model~\cite {Pang:2018zzo,Wu:2018cpc} whose initial energy density is obtained from the AMPT model~\cite{Lin:2004en}. In order to provide reasonable descriptions of the soft hadron spectra, the starting time of the hydrodynamic evolution is set as $\tau_0=0.6$~fm and the specific shear viscosity is set as $\eta/s=0.08$.
 %The formation time of the initial heavy quark is much smaller than the initial time $\tau_0$ because of heavy quark mass.
-Before the QGP phase ($\tau < \tau_0$), heavy quarks are assumed to stream freely. Possible interaction during this early stage \cite{Mrowczynski:2017kso, Carrington:2020sww} is neglected considering the short time duration of this stage compared to the ensuing QGP phase. The subsequent heavy quark interaction with the QGP is described using our QLBT model as described in the previous section. At the chemical freeze-out hypersurface ($T_\mathrm{c}$), we convert heavy quarks into heavy flavor hadrons using a hybrid coalescence-fragmentation hadronization model~\cite{Cao:2019iqs}, in which the coalescence probability between heavy quarks and thermal light quarks are determined by the wavefunction overlap between the free-quark state and hadronic bound state, and heavy quarks that do not hadronize through coalescence are fragmented into heavy flavor hadrons via Pythia~\cite{Sjostrand:2006za} simulation. Within this framework, we analyze the $R_\mathrm{AA}$ and $v_2$ of $D$ mesons in Pb-Pb collisions at $\sqrt{s_\mathrm{NN}} = 5.02$~TeV at the LHC and in Au-Au collisions at $\sqrt{s_\mathrm{NN}}= 200$~GeV at RHIC. The two model parameters $A$ and $B$ in Eq.~(\ref{eq:paraAlphas}) can then be obtained from calibrating the QLBT model to \textcolor{blue}{these} experimental data using the Bayesian statistical analysis method.
-With the extracted parameters, one may further calculate heavy quark transport coefficient $\hat{q}$ and the spatial diffusion coefficient $D_\mathrm{s}$. {\color{blue} In the present study, we only concentrate on the interaction strength between heavy quarks and the QGP, characterized by the $(A, B)$ parameters. Other model parameters, such as different kinematic cuts in the transport model and the starting time of the hydrodynamic evolution~\cite{Andres:2019eus}, may also affect the heavy meson observables in the end. A simultaneous calibration of all these model parameters is computational expensive and will be left for a future investigation.}
+Before the QGP phase ($\tau < \tau_0$), heavy quarks are assumed to stream freely. Possible interaction during this early stage \cite{Mrowczynski:2017kso, Carrington:2020sww} is neglected considering the short time duration of this stage compared to the ensuing QGP phase. The subsequent heavy quark interaction with the QGP is described using our QLBT model as described in the previous section. At the chemical freeze-out hypersurface ($T_\mathrm{c}$), we convert heavy quarks into heavy flavor hadrons using a hybrid coalescence-fragmentation hadronization model~\cite{Cao:2019iqs}, in which the coalescence probability between heavy quarks and thermal light quarks are determined by the wavefunction overlap between the free-quark state and hadronic bound state, and heavy quarks that do not hadronize through coalescence are fragmented into heavy flavor hadrons via Pythia~\cite{Sjostrand:2006za} simulation. Within this framework, we analyze the $R_\mathrm{AA}$ and $v_2$ of $D$ mesons in Pb-Pb collisions at $\sqrt{s_\mathrm{NN}} = 5.02$~TeV at the LHC and in Au-Au collisions at $\sqrt{s_\mathrm{NN}}= 200$~GeV at RHIC. The two model parameters $A$ and $B$ in Eq.~(\ref{eq:paraAlphas}) can then be obtained from calibrating the QLBT model to theses experimental data using the Bayesian statistical analysis method.
+With the extracted parameters, one may further calculate heavy quark transport coefficient $\hat{q}$ and the spatial diffusion coefficient $D_\mathrm{s}$.
 
-In Fig.~\ref{RAA-v2}, we first present the $D$ meson $R_\mathrm{AA}$ and $v_2$ at RHIC and the LHC after our model calibration. The error bands represent the the 95\% confidence interval. One can see that with the application of the lattice EoS, our QLBT model provides a reasonable description of the $D$ meson observables at both RHIC and the LHC. No significant difference can be observed between applying the WB EoS and the HQ EoS. {\color{blue} Since we have not included the interpolation error from the Gaussian emulator in the present study, the width of the 95\% confidence interval shown for our results could be underestimated. The fluctuation seen in our results are from the limited statistics of our simulation, which should not represent any physics.}
-%\textcolor{blue}{Due to insufficient events for heavy quarks for hadronization, $v_2$ for AuAu collision fluctuates up and down in Fig. 5. We remind that we didn't include interpolation error of emulator in this work, which lead to the extremely narrow bands of $R_{AA}$ and $v_2$.}
- \textcolor{blue}{The extremely narrow bands of our heavy meson observables at very low $p_\mathrm{T}$ could be understood with the thermalization limit of low energy heavy quarks, whose spectra are insensitive to the variation of our model parameters.}
+In Fig.~\ref{RAA-v2}, we first present the $D$ meson $R_\mathrm{AA}$ and $v_2$ at RHIC and the LHC after our model calibration. The error bands represent the the 95\% confidence interval. One can see that with the application of the lattice EoS, our QLBT model provides a reasonable description of the $D$ meson observables at both RHIC and the LHC. No significant difference can be observed between applying the WB EoS and the HQ EoS.
 
 Shown in Fig.~\ref{AB} are the posterior distributions of the $(A, B)$ parameter space obtained from the above model calibration, in which the left and right panel corresponds to distribution extracted with WB and HQ EoS respectively. In the off-diagonal sub-figures, we also present the correlation between parameters $A$ and $B$.
 Note that during the $\alpha_{\rm s}(E)$ calibration process, it is extremely computationally expensive to directly scan across the entire parameter space.
-To speed up the computing efficiency~\cite{He:2018gks,Cao:2021keo}, we only apply the QLBT calculations on \textcolor{blue}{100} sets of $(A, B)$ parameters that are sampled using the Latin-Hypercube algorithm, and then use the corresponding results to train the Gaussian process emulator. After being trained on the given design points, the emulator is able to interpolate between these design points and predict model results at an arbitrary point in the parameter space.
+To speed up the computing efficiency~\cite{He:2018gks,Cao:2021keo}, we only apply the QLBT calculations on 50 sets of $(A, B)$ parameters that are sampled using the Latin-Hypercube algorithm, and then use the corresponding results to train the Gaussian process emulator. After being trained on the given design points, the emulator is able to interpolate between these design points and predict model results at an arbitrary point in the parameter space.
 We then use the this Gaussian process emulator to scan across the parameter space, and update the sampled parameters using the MCMC algorithm together with the Bayesian statistics, in the same way that we applied to extract parameters of the EoS in Sec.~\ref{sec:QPM}.
 In Fig.~\ref{AB}, one can observe that although two different lattice EoS are used in our analysis, they lead to similar values of $A$ and $B$ for heavy-quark-medium interaction coupling in the end (see their mean values and standard errors in Table \ref{tab:4}). This can be understood with the competing effects between the coupling strength $g(T)$ and the thermal parton mass $m(T)$ as shown in Fig.~\ref{gT-mT}. Although the WB EoS gives rise to a larger $g(T)$ than the HQ EoS does, the former yields a larger $m(T)$ than the latter as well. A larger $m(T)$ implies a lower parton density, thus a smaller scattering rate between heavy quarks and the QGP medium. These opposite effects from $g(T)$ and $m(T)$ cancel on the scattering rate, resulting in similar extracted values of the heavy-quark-medium interaction strength when comparing the QLBT model (with different EoS) to the experimental data.
 
@@ -422,10 +424,10 @@ In Fig.~\ref{AB}, one can observe that although two different lattice EoS are us
  \hline
  Lattice Data & Parameters & Mean Values & Standard Errors  \\
  \hline
-  WB   & $A$ & 0.067 & 0.004   \\
-      & $B$ & 1.188 & 0.008   \\ \hline
-  HQ   & $A$ & 0.067 & 0.0035  \\
-  	  & $B$ & 1.177 & 0.008   \\
+  WB   & A & 0.073 & 0.004   \\
+      & B & 1.204 & 0.015   \\ \hline
+  HQ   & A & 0.075 & 0.0034  \\
+  	  & B & 1.195 & 0.0157   \\
   \hline
 \end{tabular}
 	\caption{The mean and standard deviations of parameters $(A,B)$ in the coupling $\alpha_{\rm s}(E_Q)$ extracted from $R_{\rm AA}$ and $v_2$ using Wuppertal-Budapest and Hot QCD EOS.}
@@ -457,7 +459,7 @@ However, sizable differences can be seen in the extracted values of $\hat{q}$ an
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Acknowledgments}
 
-We are grateful for helpful discussion with Heng-Tong Ding. This work is supported in part by Natural Science Foundation of China under Grants No. 11775095, No. 11890710, No. 11890711 and No. 11935007, No. 11221504, No. 11861131009, No. 11890714, No. 12175122 and No. 2021-867, by U.S. DOE under Grant No. DE-AC0205CH11231 within the JETSCAPE Collaboration, and by U.S. National Science Foundation under Grants No. ACI-1550228 and No. OAC-2004571 within XSCAPE Collaboration.
+We thank Heng-Tong Ding for discussions. This work is supported in part by Natural Science Foundation of China under Grants No. 11775095, No. 11890710, No. 11890711 and No. 11935007, No. 11221504, No. 11861131009 and No. 11890714, by U.S. DOE under Grant No. DE-AC0205CH11231 within the JETSCAPE Collaboration, and by U.S. National Science Foundation under Grants No. ACI-1550228 and No. OAC-2004571 within XSCAPE Collaboration.
 Some of the calculations were performed in the Nuclear Science Computing Center at Central China Normal University (NSC$^3$), Wuhan, Hubei, China.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
